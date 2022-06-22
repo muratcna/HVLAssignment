@@ -3,6 +3,7 @@
 DrinkChooseMenu::DrinkChooseMenu(std::vector<Content> pContents)
     : MenuBase()
     , mUserBalance(0)
+    , mCurrentSpend(0)
     , mContents(pContents)
 {
 
@@ -12,8 +13,14 @@ bool DrinkChooseMenu::manageProcess()
 {
     while (true) {
         printDrink();
-        unsigned int tCommand;
-        std::cin >> tCommand;
+        unsigned int tCommand = 0;
+
+        while (std::cout << "Your wish:" && !(std::cin >> tCommand)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
+            std::cout << "Invalid input; please re-enter.\n";
+        }
+
         if(tCommand == 0){
             std::cout << "Drink choose process finished" << std::endl;
             break;

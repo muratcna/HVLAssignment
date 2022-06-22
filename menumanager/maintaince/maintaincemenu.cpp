@@ -4,6 +4,7 @@
 
 MaintainceMenu::MaintainceMenu()
     : MenuBase()
+    , mSellerBalance(0)
 {
 
 }

@@ -3,6 +3,7 @@
 MoneyEntranceMenu::MoneyEntranceMenu(std::vector<Coin> pCoins)
     : MenuBase()
     , mCoins(pCoins)
+    , mCustomerBalance(0)
 {
 
 }
@@ -11,8 +12,14 @@ bool MoneyEntranceMenu::manageProcess()
 {
     while (true) {
         manage();
-        unsigned int tCommand;
-        std::cin >> tCommand;
+        unsigned int tCommand = 0;
+
+        while (std::cout << "Your wish:" && !(std::cin >> tCommand)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
+            std::cout << "Invalid input; please re-enter.\n";
+        }
+
         if(tCommand == 0){
             std::cout << "Money enterance process finished" << std::endl;
             break;

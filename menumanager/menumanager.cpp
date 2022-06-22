@@ -29,9 +29,14 @@ void MenuManager::manage()
         std::cout << "3 for Finish Process" << std::endl;
         std::cout << "4 for Maintaince" << std::endl;
 
-        std::cout << "Your wish:";
-        unsigned int tCommand;
-        std::cin >> tCommand;
+
+        unsigned int tCommand = 0;
+
+        while (std::cout << "Your wish:" && !(std::cin >> tCommand)) {
+            std::cin.clear(); //clear bad input flag
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); //discard input
+            std::cout << "Invalid input; please re-enter.\n";
+        }
 
         if(tCommand == static_cast<int>(Enums::MenuType::MONEY_ENTRANCE_MENU)){
             mMoneyEntranceMenu->manageProcess();
